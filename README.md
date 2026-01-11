@@ -12,7 +12,7 @@ My main database is on a server and I want to show it on a website, I need to ge
 1. **Repository:** to access the database.
 2. **Controller:** to access the user interface.
 
-### Functionality (`MasinaController.java`)
+### Functionality (`[MasinaController.java](demo/src/main/java/com/example/demo/controller)`)
 In script `MasinaController.java` I use multiple adnotations (like small functions) to show and execute on different URLs functions which can add, remove or display elements from the list array. The most important one is `showCars`, displaying the car stock.
 
 ### Users and Administration
@@ -20,7 +20,7 @@ Users are very important; they are the leads basically. That’s why sometimes i
 * Add or remove cars.
 * Change the status of ownership (by choosing the new owner from an existing customer or by adding).
 
-These functions are in `[MasinaController.java](/demo/src/main/java/com/example/demo/controller)` (`addClientAndSell`, `addMasina` and `deleteMasina`).
+These functions are in `MasinaController.java` (`addClientAndSell`, `addMasina` and `deleteMasina`).
 
 ### Future Improvements
 As HTML and CSS were not my priority, the valuable part of code was represented by displaying the sorted cars by one or another field. If I needed to choose what to add for this project, I would choose:
