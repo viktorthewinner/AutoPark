@@ -1,0 +1,85 @@
+<!--/** Clasa pentru 331AA-->
+<!--* @author Plamadeala Victor-->
+<!--* @version 10 Decembrie 2025-->
+<!--*/-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AutoPark - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .nav-right { display: flex; gap: 10px; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/">AutoPark Pro</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/parc-auto">Parc Auto</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contacts">Contacts</a></li>
+            </ul>
+            <div class="d-flex gap-2">
+                <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
+                <a href="/register" class="btn btn-primary btn-sm">Creare Cont</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-dark">Lider în Managementul Parcurilor Auto</h1>
+        <p class="lead mt-4 text-secondary mx-auto" style="max-width: 800px;">
+            Din 2010, AutoPark redefinește standardele în industria auto din România.
+            Nu suntem doar un simplu parc de mașini; suntem partenerul tău de încredere în procesul
+            de achiziție și gestionare a vehiculelor, combinând pasiunea pentru inginerie cu
+            cele mai avansate tehnologii digitale de monitorizare și mentenanță.
+        </p>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <i class="fas fa-certificate fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold">Calitate Garantată</h4>
+                <p class="text-muted">Fiecare vehicul din parcul nostru trece printr-o inspecție tehnică riguroasă de peste 150 de puncte înainte de a fi listat.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold">Transparență Totală</h4>
+                <p class="text-muted">Oferim istoricul complet de service și rapoarte de daune detaliate pentru ca tu să cumperi cu încredere deplină.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold">Garanție Extinsă</h4>
+                <p class="text-muted">Toate achizițiile beneficiază de o garanție standard de 12 luni, cu posibilitatea de extindere până la 24 de luni.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-5 rounded shadow-sm mt-4 mb-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h2 class="fw-bold mb-4">Misiunea Noastră</h2>
+                <p>La AutoPark, credem că drumul către mașina ta perfectă trebuie să fie unul lipsit de stres. De aceea, am investit constant în digitalizare, permițându-vă să vizualizați stocul în timp real, să programați test-drive-uri și să gestionați documentele necesare direct prin platforma noastră online.</p>
+                <p>Fie că ești un cumpărător individual în căutarea primei mașini, fie că reprezinți o companie care dorește să își extindă flota comercială, experții noștri sunt aici pentru a-ți oferi consultanță personalizată și soluții de finanțare adaptate bugetului tău.</p>
+            </div>
+            <div class="col-lg-5 text-center">
+                <i class="fas fa-car-side fa-10x text-light"></i>
+            </div>
+        </div>
+        <a href="/parc-auto" class="btn btn-success">Vezi Mașinile Disponibile</a>
+    </div>
+</div>
+</body>
+</html>

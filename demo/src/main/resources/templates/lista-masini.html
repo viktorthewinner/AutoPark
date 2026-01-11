@@ -1,0 +1,144 @@
+<!--/** Clasa pentru 331AA-->
+<!--* @author Plamadeala Victor-->
+<!--* @version 10 Decembrie 2025-->
+<!--*/-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoPark - Inventar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-panel { background-color: #f8f9fa; border-left: 5px solid #0d6efd; }
+        .sort-link { text-decoration: none; color: white; font-size: 0.8rem; }
+        .sort-link:hover { color: #0d6efd; }
+        .new-client-box { border: 2px dashed #0d6efd; background-color: #f0f7ff; }
+    </style>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/">AutoPark Pro</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/parc-auto">Parc Auto</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contacts">Contacts</a></li>
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+                <span class="navbar-text me-2" th:if="${currentUser != null}" th:text="'Utilizator: ' + ${currentUser}"></span>
+                <a href="/login" class="btn btn-outline-light btn-sm" th:if="${currentUser == null}">Login</a>
+                <a href="/logout" class="btn btn-danger btn-sm" th:if="${currentUser != null}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+
+    <div th:if="${currentUser == 'admin'}" class="card admin-panel shadow mb-4">
+        <div class="card-header bg-primary text-white fw-bold">Management Parc Auto</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7 border-end">
+                    <h6>Adaugă Mașină</h6>
+                    <form th:action="@{/admin/add-masina}" th:object="${nouaMasina}" method="post" class="row g-2">
+                        <div class="col-md-6"><input type="text" th:field="*{marca}" class="form-control form-control-sm" placeholder="Marcă" required></div>
+                        <div class="col-md-6"><input type="text" th:field="*{model}" class="form-control form-control-sm" placeholder="Model" required></div>
+                        <div class="col-md-4"><input type="number" th:field="*{anFabricatie}" class="form-control form-control-sm" placeholder="An" required></div>
+                        <div class="col-md-4"><input type="number" th:field="*{km}" class="form-control form-control-sm" placeholder="KM" required></div>
+                        <div class="col-md-4"><input type="number" step="0.01" th:field="*{pret}" class="form-control form-control-sm" placeholder="Preț €" required></div>
+                        <button type="submit" class="btn btn-success btn-sm">Salvează Mașina</button>
+                    </form>
+                </div>
+                <div class="col-md-5 ps-3">
+                    <h6>Șterge Mașină</h6>
+                    <form th:action="@{/admin/delete-masina}" method="post">
+                        <select name="masinaId" class="form-select form-select-sm mb-2" required>
+                            <option value="" disabled selected>Alege mașina...</option>
+                            <option th:each="m : ${listaMasini}" th:value="${m.idMasina}"
+                                    th:text="${m.marca + ' ' + m.model + ' (' + m.anFabricatie + ')'}"></option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Ștergi definitiv?')">Elimină</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th>Marca <a class="sort-link" th:href="@{/parc-auto(field='marca', dir=${reverseDir})}"><i class="fas fa-sort"></i></a></th>
+                    <th>Model</th>
+                    <th>An <a class="sort-link" th:href="@{/parc-auto(field='anFabricatie', dir=${reverseDir})}"><i class="fas fa-sort"></i></a></th>
+                    <th>KM <a class="sort-link" th:href="@{/parc-auto(field='km', dir=${reverseDir})}"><i class="fas fa-sort"></i></a></th>
+                    <th>Preț <a class="sort-link" th:href="@{/parc-auto(field='pret', dir=${reverseDir})}"><i class="fas fa-sort"></i></a></th>
+                    <th>Status / Acțiuni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${listaMasini}">
+                    <td th:text="${m.marca}" class="fw-bold"></td>
+                    <td th:text="${m.model}"></td>
+                    <td th:text="${m.anFabricatie}"></td>
+                    <td th:text="${#numbers.formatInteger(m.km, 0, 'POINT') + ' km'}"></td>
+                    <td th:text="${m.pret + ' €'}" class="text-primary fw-bold"></td>
+                    <td>
+                        <div th:if="${currentUser == 'admin'}">
+                            <form th:action="@{/admin/update-status}" method="post" th:id="'formStatus' + ${m.idMasina}">
+                                <input type="hidden" name="masinaId" th:value="${m.idMasina}">
+                                <select name="clientId" class="form-select form-select-sm"
+                                        th:onchange="'handleStatusChange(this, ' + ${m.idMasina} + ')'">
+                                    <option th:value="null" th:selected="${m.cumparator == null}">Disponibilă</option>
+                                    <option value="NEW">Vândută (Client Nou...)</option>
+                                    <option th:each="c : ${listaClienti}"
+                                            th:value="${c.idClient}"
+                                            th:selected="${m.cumparator != null && m.cumparator.idClient == c.idClient}"
+                                            th:text="${'Vândută: ' + c.nume + ' ' + c.prenume}">
+                                    </option>
+                                </select>
+                            </form>
+
+                            <div th:id="'newClientDiv' + ${m.idMasina}" class="new-client-box mt-2 p-2 d-none shadow-sm">
+                                <p class="small fw-bold mb-1 text-primary">Date Client Nou:</p>
+                                <form th:action="@{/admin/add-client-and-sell}" method="post">
+                                    <input type="hidden" name="masinaId" th:value="${m.idMasina}">
+                                    <input type="text" name="nume" placeholder="Nume" class="form-control form-control-sm mb-1" required>
+                                    <input type="text" name="prenume" placeholder="Prenume" class="form-control form-control-sm mb-1" required>
+                                    <input type="text" name="cnp" placeholder="CNP (13 cifre)" class="form-control form-control-sm mb-1" required>
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">Salvează & Vinde</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div th:if="${currentUser != 'admin'}">
+                            <span th:if="${m.cumparator != null}" class="badge bg-danger">Vândută</span>
+                            <span th:if="${m.cumparator == null}" class="badge bg-success">Disponibilă</span>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function handleStatusChange(select, masinaId) {
+        const div = document.getElementById('newClientDiv' + masinaId);
+        if (select.value === "NEW") {
+            div.classList.remove('d-none');
+        } else {
+            div.classList.add('d-none');
+            select.form.submit(); // Trimite formularul automat pentru "Disponibil" sau Client existent
+        }
+    }
+</script>
+</body>
+</html>

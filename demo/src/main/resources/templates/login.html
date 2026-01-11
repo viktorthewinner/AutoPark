@@ -1,0 +1,169 @@
+<!--/** Clasa pentru 331AA-->
+<!--* @author Plamadeala Victor-->
+<!--* @version 10 Decembrie 2025-->
+<!--*/-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoPark - Autentificare</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            /* Același gradient ca la Register pentru consistență */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px 15px 0 0 !important;
+        }
+
+        .card-header h3 {
+            color: #4a4a4a;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 30px 40px;
+            background-color: #ffffff;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .input-group-text {
+            background-color: transparent;
+            border-right: none;
+            color: #aaa;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+        }
+
+        .btn-login {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+            color: white;
+        }
+
+        .alert-danger {
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: none;
+            background-color: #fff5f5;
+            color: #e53e3e;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .register-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="card shadow">
+        <div class="card-header">
+            <i class="fas fa-car-side fa-3x mb-3" style="color: #667eea;"></i>
+            <h3>Autentificare</h3>
+        </div>
+        <div class="card-body">
+            <div th:if="${error}" class="alert alert-danger mb-4 text-center">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span th:text="${error}"></span>
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Utilizator</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" name="username" class="form-control" placeholder="admin" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Parolă</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" name="parola" class="form-control" placeholder="********" required>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-login">Intră în cont</button>
+                </div>
+
+                <div class="register-link">
+                    Nu ai cont? <a href="/register">Înregistrează-te acum</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/" class="text-white-50 text-decoration-none small">
+            <i class="fas fa-home me-1"></i> Înapoi la Pagina Principală
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!--/** Clasa pentru 331AA-->
+<!--* @author Plamadeala Victor-->
+<!--* @version 10 Decembrie 2025-->
+<!--*/-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoPark - Contact</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/">AutoPark Pro</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/parc-auto">Parc Auto</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/contacts">Contacts</a></li>
+            </ul>
+            <div class="d-flex gap-2">
+                <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
+                <a href="/register" class="btn btn-primary btn-sm">Creare Cont</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Contactați-ne</h2>
+            <p class="text-muted">Echipa noastră vă stă la dispoziție pentru orice întrebare legată de parcul nostru auto.</p>
+            <ul class="list-unstyled mt-4">
+                <li><strong>Adresă:</strong> Str. Auto nr. 10, București</li>
+                <li><strong>Telefon:</strong> +40 722 123 456</li>
+                <li><strong>Email:</strong> contact@autopark.ro</li>
+                <li><strong>Program:</strong> L-V: 09:00 - 18:00</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nume complet</label>
+                        <input type="text" class="form-control" placeholder="Ion Popescu">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mesaj</label>
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Trimite Mesaj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

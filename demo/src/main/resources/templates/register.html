@@ -1,0 +1,202 @@
+<!--/** Clasa pentru 331AA-->
+<!--* @author Plamadeala Victor-->
+<!--* @version 10 Decembrie 2025-->
+<!--*/-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoPark - Creare Cont</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            /* Gradient modern pentru fundal */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            color: #4a4a4a;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .card-body {
+            padding: 40px;
+            background-color: #ffffff;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-register {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+            color: white;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Stil pentru iconițe în interiorul input-urilor (opțional) */
+        .input-group-text {
+            background-color: transparent;
+            border-right: none;
+            color: #aaa;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Creează Cont</h3>
+            <p>Alătură-te comunității AutoPark Pro</p>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/register}" th:object="${utilizator}" method="post">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nume</label>
+                        <input type="text" th:field="*{nume}" class="form-control" placeholder="Popescu" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Prenume</label>
+                        <input type="text" th:field="*{prenume}" class="form-control" placeholder="Ion" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" th:field="*{username}" class="form-control" placeholder="user123" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Parolă</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" th:field="*{parola}" class="form-control" placeholder="********" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" th:field="*{mail}" class="form-control" placeholder="contact@exemplu.ro">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Telefon</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        <input type="text" th:field="*{telefon}" class="form-control" placeholder="07xxxxxxxx">
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-register shadow-sm">Înregistrează-te</button>
+                </div>
+
+                <div class="login-link">
+                    Ai deja un cont? <a href="/login">Autentifică-te</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/" class="text-white-50 text-decoration-none small">
+            <i class="fas fa-arrow-left me-1"></i> Înapoi la Home
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
